@@ -144,18 +144,17 @@
     <h2><span class="n">3</span>Sizning biznes g‘oyangiz</h2>
     <p class="sub">Tanish sohani tanlang (oilaviy biznes, kafe, o‘quv markazi, onlayn do‘kon…). G‘oyada raqamli texnologiya bo‘lsin: sayt, bot, ilova, onlayn to‘lov.</p>
     <div class="idea-grid">
-      <div><label for="f_name">Biznes nomi</label><input id="f_name" placeholder="Tez Osh"></div>
-      <div><label for="f_prod">Mahsulot yoki xizmat</label><input id="f_prod" placeholder="osh va milliy taomlarni yetkazib berish"></div>
-      <div><label for="f_cust">Mijozlar — kim uchun</label><input id="f_cust" placeholder="ofis xodimlari va talabalar"></div>
-      <div><label for="f_prob">Qaysi muammoni hal qiladi</label><input id="f_prob" placeholder="tushlikka vaqt yo‘q"></div>
-      <div><label for="f_val">Qanday qiymat beradi</label><input id="f_val" placeholder="tez, issiq, arzon — 30 daqiqada"></div>
-      <div><label for="f_tech">Raqamli texnologiyalar</label><input id="f_tech" placeholder="sayt, Telegram-bot, Payme/Click, GPS"></div>
+      <div><label for="f_name">Biznes nomi</label><input id="f_name" placeholder="Nomi"></div>
+      <div><label for="f_prod">Mahsulot yoki xizmat</label><input id="f_prod" placeholder="Nima sotasiz yoki qanday xizmat"></div>
+      <div><label for="f_cust">Mijozlar — kim uchun</label><input id="f_cust" placeholder="Kimlar sotib oladi"></div>
+      <div><label for="f_prob">Qaysi muammoni hal qiladi</label><input id="f_prob" placeholder="Mijozning qaysi muammosi"></div>
+      <div><label for="f_val">Qanday qiymat beradi</label><input id="f_val" placeholder="Mijoz nima foyda oladi"></div>
+      <div><label for="f_tech">Raqamli texnologiyalar</label><input id="f_tech" placeholder="sayt, bot, ilova, onlayn to‘lov…"></div>
     </div>
     <label for="idea" style="margin-top:10px">G‘oya 2–3 gapda (imtihonda shunday yozasiz)</label>
-    <textarea id="idea" rows="3" placeholder="Jadvalni to‘ldiring va «Gapga aylantirish»ni bosing yoki o‘zingiz yozing."></textarea>
+    <textarea id="idea" rows="3" placeholder="Jadvalni to‘ldirib «Gapga aylantirish»ni bosing yoki o‘zingiz yozing"></textarea>
     <div class="row">
       <button class="btn small" id="toText" type="button">Gapga aylantirish</button>
-      <button class="btn ghost small" id="sample" type="button">«Tez Osh» misolini qo‘yish</button>
       <a class="btn ghost small" id="ideaGpt" href="#" target="_blank" rel="noopener">G‘oya topolmayapman — ChatGPT</a>
     </div>
   </section>
@@ -258,10 +257,9 @@ const Q = [
       'SEO «Tez Osh» uchun arzon va uzoq muddatli mijoz manbai. Tavsiya: kalit so‘zlar va on-page’dan boshlash, Google Maps’ni to‘ldirish va natijani Search Console’da kuzatish.'] },
 ];
 const RUB = [['Tushunchalar va atamalar (LO1)', 'ta’rif bor, atamalar to‘g‘ri, inglizchasi qavsda'], ['Tanlash va asoslash (LO2)', 'nega aynan shu texnologiya yoki tizim'], ['Biznesga qo‘llash', 'aynan shu biznes, aniq misol'], ['Tahlil', 'kamida 2 afzallik va 2 cheklov yoki muqobil'], ['Tuzilish va aniqlik', '5 qism bor, mantiqiy, savolga mos']];
-const SAMPLE = { f_name: 'Tez Osh', f_prod: 'osh va milliy taomlarni yetkazib berish', f_cust: 'ofis xodimlari va talabalar', f_prob: 'tushlikka vaqt yo‘q', f_val: '30 daqiqada issiq va arzon taom', f_tech: 'sayt, Telegram-bot, Payme/Click, kuryerlar uchun GPS ilova' };
 const FIELDS = ['f_name', 'f_prod', 'f_cust', 'f_prob', 'f_val', 'f_tech'];
 const $ = id => document.getElementById(id);
-const store = { get(k, d) { try { return localStorage.getItem('dbb2_' + k) ?? d; } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem('dbb2_' + k, v); } catch (e) {} } };
+const store = { get(k, d) { try { return localStorage.getItem('dbb3_' + k) ?? d; } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem('dbb3_' + k, v); } catch (e) {} } };
 let script = store.get('script', 'lat');
 const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 
@@ -368,7 +366,6 @@ FIELDS.forEach(f => { $(f).value = store.get(f, ''); $(f).addEventListener('inpu
 $('idea').value = store.get('idea', '');
 $('idea').addEventListener('input', () => store.set('idea', $('idea').value));
 $('toText').onclick = buildIdea;
-$('sample').onclick = () => { FIELDS.forEach(f => { $(f).value = SAMPLE[f]; store.set(f, SAMPLE[f]); }); buildIdea(); };
 $('ideaGpt').addEventListener('click', ev => openGpt(prompt('idea'), ev));
 $('allPlan').addEventListener('click', ev => { if (needIdea(ev)) return; openGpt(prompt('all'), ev); });
 $('script').querySelectorAll('button').forEach(b => b.onclick = () => { script = b.dataset.s; store.set('script', script); sync(); });

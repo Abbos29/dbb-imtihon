@@ -3,185 +3,376 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DBB imtihon yordamchisi</title>
-<meta name="description" content="Raqamli biznes asoslari (DBB): B qism uchun o‘z biznes g‘oyangiz bo‘yicha javob rejasi, namuna javob va javobni tekshirish — ChatGPT bilan.">
+<title>DBB imtihon: B qism</title>
+<meta name="description" content="Raqamli biznes asoslari (DBB): imtihonning B qismiga qadam-baqadam tayyorgarlik — javob formulasi, tayyor namunalar, o‘z biznesingiz uchun ChatGPT yordamchisi, sinov imtihoni va o‘zini baholash.">
 <meta name="theme-color" content="#0E7C66">
 <style>
   :root {
     --acc: #0E7C66; --acc-soft: #E3F1ED; --ink: #1F2328; --muted: #6B7280; --line: #E5E7EB;
-    --card: #F6F7F9; --bg: #FFFFFF;
+    --card: #F6F7F9; --bg: #FFFFFF; --red: #C0392B; --red-soft: #FBF0F0;
     --s1: #0E7C66; --s2: #2FA36B; --s3: #E8B931; --s4: #D64545; --s5: #1F2328;
   }
   @media (prefers-color-scheme: dark) {
-    :root { --acc: #5EC4A8; --acc-soft: #1C3530; --ink: #ECEEF1; --muted: #A3A9B3; --line: #2E343C; --card: #1E2329; --bg: #14181C; --s5: #4B5563; }
+    :root { --acc: #5EC4A8; --acc-soft: #1C3530; --ink: #ECEEF1; --muted: #A3A9B3; --line: #2E343C; --card: #1E2329; --bg: #14181C; --red: #FF8A7A; --red-soft: #3A2420; --s5: #4B5563; }
   }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
-  main { max-width: 620px; margin: 0 auto; padding: 20px 16px 48px; }
-  h1 { font-size: 26px; line-height: 1.2; margin: 6px 0 6px; }
-  .lead { color: var(--muted); margin: 0 0 16px; }
-  h2 { font-size: 15px; margin: 22px 0 8px; }
-  h2 .n { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--acc); color: #fff; font-size: 13px; margin-right: 8px; }
-  .formula { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin: 8px 0 4px; }
-  .formula span { border-radius: 10px; padding: 8px 4px; text-align: center; font-size: 11.5px; font-weight: 700; color: #fff; }
-  .formula span:nth-child(1) { background: var(--s1); } .formula span:nth-child(2) { background: var(--s2); }
-  .formula span:nth-child(3) { background: var(--s3); color: #1F2328; } .formula span:nth-child(4) { background: var(--s4); }
-  .formula span:nth-child(5) { background: var(--s5); }
-  .formula b { display: block; font-size: 15px; }
-  textarea { width: 100%; font: inherit; padding: 12px 14px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--card); color: var(--ink); resize: vertical; }
-  textarea:focus { outline: none; border-color: var(--acc); }
-  .hint { font-size: 13px; color: var(--muted); margin: 6px 0 0; }
-  .link { font: inherit; font-size: 13px; color: var(--acc); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
-  .seg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .seg button, .qs label, .script button { font: inherit; cursor: pointer; border: 1.5px solid var(--line); background: var(--card); color: var(--ink); border-radius: 12px; }
-  .seg button { padding: 10px 6px; font-size: 14px; font-weight: 600; }
-  .seg button small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; margin-top: 2px; }
-  .seg button.on, .script button.on { border-color: var(--acc); background: var(--acc-soft); }
-  .qs { display: grid; gap: 8px; }
-  .qs label { display: flex; gap: 10px; align-items: flex-start; padding: 11px 12px; }
-  .qs input { margin-top: 4px; accent-color: var(--acc); }
-  .qs strong { display: block; font-size: 14.5px; }
-  .qs span { font-size: 13px; color: var(--muted); }
-  .qs label.on { border-color: var(--acc); background: var(--acc-soft); }
-  .qs label.off { opacity: .45; pointer-events: none; }
-  .script { display: inline-flex; gap: 6px; }
-  .script button { padding: 7px 14px; font-size: 14px; font-weight: 600; }
-  .row { display: flex; gap: 8px; margin-top: 18px; flex-wrap: wrap; }
-  .btn { font: inherit; font-weight: 700; padding: 13px 16px; border-radius: 12px; border: 0; cursor: pointer; background: var(--acc); color: #fff; text-decoration: none; flex: 1; text-align: center; }
-  .btn.ghost { background: transparent; color: var(--acc); border: 1.5px solid var(--acc); flex: 0 1 auto; }
-  .btn[aria-disabled="true"] { opacity: .45; pointer-events: none; }
-  .note { margin-top: 18px; padding: 14px 16px; border-radius: 14px; background: var(--acc-soft); font-size: 14px; }
-  .note b { color: var(--acc); }
-  details { margin-top: 14px; font-size: 13px; color: var(--muted); }
-  details pre { white-space: pre-wrap; background: var(--card); padding: 12px; border-radius: 10px; color: var(--ink); font-size: 12.5px; }
-  .toast { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 10px; font-size: 14px; max-width: 90vw; }
-  footer { margin-top: 28px; font-size: 12px; color: var(--muted); text-align: center; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 20px 16px 60px; }
+  h1 { font-size: 27px; line-height: 1.2; margin: 6px 0 6px; }
+  .lead { color: var(--muted); margin: 0 0 14px; }
+  nav { display: flex; gap: 6px; flex-wrap: wrap; margin: 12px 0 4px; }
+  nav a { font-size: 13px; font-weight: 600; color: var(--acc); background: var(--acc-soft); border-radius: 999px; padding: 6px 11px; text-decoration: none; }
+  section.step { margin-top: 34px; }
+  h2 { font-size: 21px; margin: 0 0 6px; display: flex; gap: 10px; align-items: center; }
+  h2 .n { flex: none; display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--acc); color: #fff; font-size: 15px; }
+  .sub { color: var(--muted); margin: 0 0 12px; font-size: 15px; }
+  .box { background: var(--card); border-radius: 14px; padding: 14px 16px; margin: 10px 0; }
+  .box.soft { background: var(--acc-soft); }
+  .box.warn { background: var(--red-soft); }
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .facts div { background: var(--card); border-radius: 12px; padding: 10px; }
+  .facts b { display: block; color: var(--acc); font-size: 18px; }
+  .facts span { font-size: 12.5px; color: var(--muted); }
+  ul.clean { margin: 6px 0 0; padding-left: 20px; } ul.clean li { margin: 4px 0; }
+  .formula { display: grid; gap: 8px; }
+  .fstep { display: grid; grid-template-columns: 112px 1fr; gap: 10px; align-items: start; background: var(--card); border-radius: 12px; padding: 10px; }
+  .chip { border-radius: 8px; padding: 6px 4px; text-align: center; font-size: 12.5px; font-weight: 800; color: #fff; }
+  .c1 { background: var(--s1); } .c2 { background: var(--s2); } .c3 { background: var(--s3); color: #1F2328; } .c4 { background: var(--s4); } .c5 { background: var(--s5); }
+  .fstep p { margin: 0; font-size: 14.5px; } .fstep small { color: var(--muted); display: block; margin-top: 2px; }
+  .tabs { display: flex; gap: 6px; flex-wrap: wrap; margin: 6px 0 10px; }
+  .tabs button, .seg button { font: inherit; cursor: pointer; border: 1.5px solid var(--line); background: var(--card); color: var(--ink); border-radius: 10px; padding: 8px 11px; font-size: 13.5px; font-weight: 600; }
+  .tabs button.on, .seg button.on { border-color: var(--acc); background: var(--acc-soft); }
+  .model .q { font-style: italic; color: var(--muted); font-size: 14px; margin: 0 0 10px; }
+  .model .part { display: grid; grid-template-columns: 112px 1fr; gap: 10px; margin: 8px 0; }
+  .model .part p { margin: 0; font-size: 14.5px; }
+  .idea-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  label { display: block; font-size: 13px; font-weight: 600; color: var(--muted); margin: 0 0 4px; }
+  input, textarea { width: 100%; font: inherit; font-size: 15px; padding: 10px 12px; border-radius: 10px; border: 1.5px solid var(--line); background: var(--card); color: var(--ink); }
+  textarea { resize: vertical; }
+  input:focus, textarea:focus { outline: none; border-color: var(--acc); }
+  .row { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+  .btn { font: inherit; font-weight: 700; font-size: 14.5px; padding: 11px 14px; border-radius: 12px; border: 0; cursor: pointer; background: var(--acc); color: #fff; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
+  .btn.ghost { background: transparent; color: var(--acc); border: 1.5px solid var(--acc); }
+  .btn.small { font-size: 13.5px; padding: 9px 12px; }
+  details.q { background: var(--card); border-radius: 14px; margin: 10px 0; }
+  details.q summary { cursor: pointer; list-style: none; padding: 14px 16px; font-weight: 700; display: flex; gap: 10px; align-items: center; }
+  details.q summary::-webkit-details-marker { display: none; }
+  details.q summary .qn { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--acc); color: #fff; display: grid; place-items: center; font-size: 14px; }
+  details.q summary::after { content: "+"; margin-left: auto; color: var(--acc); font-size: 20px; }
+  details.q[open] summary::after { content: "–"; }
+  details.q .in { padding: 0 16px 16px; }
+  .qtext { font-style: italic; color: var(--muted); font-size: 14px; margin: 0 0 8px; }
+  .must li { margin: 3px 0; font-size: 14.5px; }
+  .terms { font-size: 14px; margin: 8px 0 0; }
+  .err { font-size: 14px; color: var(--red); margin: 6px 0 0; }
+  .gpt { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 12px; }
+  .gpt .seg { display: flex; gap: 6px; flex-wrap: wrap; }
+  .timer { text-align: center; }
+  .timer .t { font-size: 64px; font-weight: 800; color: var(--acc); font-variant-numeric: tabular-nums; line-height: 1.1; }
+  .rub { display: grid; gap: 8px; }
+  .rub .r { background: var(--card); border-radius: 12px; padding: 10px 12px; }
+  .rub .r p { margin: 0 0 6px; font-size: 14.5px; } .rub .r small { color: var(--muted); }
+  .pts { display: flex; gap: 6px; }
+  .pts button { font: inherit; flex: 1; cursor: pointer; border: 1.5px solid var(--line); background: var(--bg); color: var(--ink); border-radius: 8px; padding: 6px 0; font-weight: 700; }
+  .pts button.on { background: var(--acc); color: #fff; border-color: var(--acc); }
+  .total { font-size: 20px; font-weight: 800; margin-top: 10px; }
+  .plan td { padding: 6px 8px; border-bottom: 1px solid var(--line); font-size: 14px; vertical-align: top; }
+  .plan td:first-child { font-weight: 700; color: var(--acc); white-space: nowrap; }
+  .plan { border-collapse: collapse; width: 100%; }
+  .toast { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 10px; font-size: 14px; max-width: 90vw; z-index: 9; }
+  footer { margin-top: 40px; font-size: 12px; color: var(--muted); text-align: center; }
+  @media (max-width: 520px) { .fstep, .model .part { grid-template-columns: 1fr; } .idea-grid { grid-template-columns: 1fr; } .facts { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 <main>
-  <h1>DBB imtihon yordamchisi</h1>
-  <p class="lead">B qism: o‘z biznes g‘oyangiz bo‘yicha javob rejasi, namuna javob yoki javobingizni tekshirish. Tugma ChatGPT’ni tayyor so‘rov bilan ochadi.</p>
+  <h1>DBB imtihon: B qismga tayyorgarlik</h1>
+  <p class="lead">Yuqoridan pastga qadam-baqadam o‘ting: formulani o‘rganing, namunani ko‘ring, o‘z biznesingiz uchun ChatGPT bilan reja tuzing va sinov imtihonini yozing.</p>
+  <nav>
+    <a href="#s0">Imtihon</a><a href="#s1">1 Formula</a><a href="#s2">2 Namuna</a><a href="#s3">3 G‘oya</a><a href="#s4">4 5 savol</a><a href="#s5">5 Sinov</a><a href="#s6">6 Baho</a>
+  </nav>
 
-  <div class="formula" aria-label="Javob formulasi">
-    <span><b>1</b>TUSHUNCHA</span><span><b>2</b>BIZNES</span><span><b>3</b>MISOL</span><span><b>4</b>TAHLIL</span><span><b>5</b>XULOSA</span>
-  </div>
-  <p class="hint">Har bir javob — shu 5 qism: atama ta’rifi → biznesingizga qo‘llash → aniq misol → afzallik va cheklov → asosli tavsiya.</p>
+  <section class="step" id="s0">
+    <h2>Imtihon qanday o‘tadi</h2>
+    <div class="facts">
+      <div><b>2 soat</b><span>yopiq kitob, telefon yo‘q, individual</span></div>
+      <div><b>A qism · 40</b><span>20 test, 4 variantdan 1 tasi to‘g‘ri</span></div>
+      <div><b>B qism · 60</b><span>o‘z biznes g‘oyangiz + 5 savoldan 3 tasi × 20</span></div>
+    </div>
+    <div class="box">
+      <b>B qism tartibi:</b> avval o‘z biznes g‘oyangizni 2–3 gapda yozasiz, keyin 5 savoldan 3 tasini tanlab javob berasiz. <b>Har bir javob — alohida sahifada, savol raqami bilan.</b>
+      <ul class="clean">
+        <li><b>Vaqt rejasi:</b> A qism 25 daq · g‘oya 5 daq · har bir B javob ~28 daq · tekshirish 6 daq.</li>
+        <li><b>G‘oyani oldindan tanlang</b> va 5 savolning hammasiga reja tayyorlang — imtihonda qaysi 3 tasini yozishni o‘zingiz tanlaysiz.</li>
+      </ul>
+    </div>
+    <details class="box soft"><summary><b>Darsda qanday ishlaymiz (120 daqiqa)</b></summary>
+      <table class="plan">
+        <tr><td>0–15</td><td>1–2 qadam: formula va namunani birga ko‘ramiz</td></tr>
+        <tr><td>15–25</td><td>3 qadam: har kim o‘z biznes g‘oyasini yozadi</td></tr>
+        <tr><td>25–75</td><td>4 qadam: 5 savol × 10 daqiqa — savolni o‘qiymiz, ChatGPT bilan reja, o‘z so‘zingiz bilan qisqa reja yozasiz, juftlikda tekshirasiz</td></tr>
+        <tr><td>75–80</td><td>Tanaffus, telefonlar sumkaga</td></tr>
+        <tr><td>80–105</td><td>5 qadam: sinov imtihoni — 1 savol, 25 daqiqa, qog‘ozda</td></tr>
+        <tr><td>105–115</td><td>6 qadam: qo‘shningiz javobini baholaysiz</td></tr>
+        <tr><td>115–120</td><td>Uyga: har bir savolga 1 marta yozib, «Javobimni tekshir»</td></tr>
+      </table>
+    </details>
+  </section>
 
-  <h2><span class="n">1</span>Biznes g‘oyangiz (2–3 gap)</h2>
-  <textarea id="idea" rows="4" placeholder="Masalan: «Tez Osh» — Toshkentda osh va milliy taomlarni sayt va Telegram-bot orqali 30 daqiqada yetkazib beradigan xizmat. Mijozlar — ofis xodimlari va talabalar."></textarea>
-  <p class="hint">Nomi, mahsulot yoki xizmat, mijozlar, qaysi muammoni hal qiladi, qaysi raqamli texnologiyalar. <button class="link" id="sample" type="button">Misolni qo‘yish</button></p>
+  <section class="step" id="s1">
+    <h2><span class="n">1</span>Javob formulasi</h2>
+    <p class="sub">B qismdagi har bir javob shu 5 qismdan iborat. Bittasini tashlab ketsangiz — ball yo‘qotasiz.</p>
+    <div class="formula">
+      <div class="fstep"><div class="chip c1">1 TUSHUNCHA</div><p>Atamaning ta’rifi, inglizchasi qavsda.<small>«Axborot tizimi (information system) — …»</small></p></div>
+      <div class="fstep"><div class="chip c2">2 BIZNES</div><p>Shu tushuncha aynan sizning biznesingizda qanday ishlaydi.<small>«Bizning biznesda bu …»</small></p></div>
+      <div class="fstep"><div class="chip c3">3 MISOL</div><p>Bitta aniq, real vaziyat — iloji bo‘lsa raqamlar bilan.<small>«Masalan, tushlikda soatiga 60 ta buyurtma …»</small></p></div>
+      <div class="fstep"><div class="chip c4">4 TAHLIL</div><p>Kamida 2 afzallik va 2 cheklov (yoki muqobil, xavf).<small>«Afzalliklari … Cheklovlari … Yechim …»</small></p></div>
+      <div class="fstep"><div class="chip c5">5 XULOSA</div><p>Asosli tavsiya yoki baho.<small>«Shuning uchun tavsiya qilaman …»</small></p></div>
+    </div>
+    <div class="box"><b>Savol fe’liga qarang:</b> «tushuntiring» — ta’rif va qanday ishlashi · «muhokama qiling» — turli tomonlar · «baholang» — foyda + cheklov + o‘z xulosangiz · «asoslang» — nega aynan shu.</div>
+  </section>
 
-  <h2><span class="n">2</span>Nima kerak?</h2>
-  <div class="seg" id="modes">
-    <button type="button" data-m="plan">Javob rejasi<small>skelet, o‘zingiz yozasiz</small></button>
-    <button type="button" data-m="model">Namuna javob<small>1 sahifalik javob</small></button>
-    <button type="button" data-m="check">Javobimni tekshir<small>mezonlar bo‘yicha ball</small></button>
-  </div>
+  <section class="step" id="s2">
+    <h2><span class="n">2</span>Tayyor namuna: «Tez Osh»</h2>
+    <p class="sub">Namuna biznes: «Tez Osh» — Toshkentda osh va milliy taomlarni sayt va Telegram-bot orqali 30 daqiqada yetkazib beradigan xizmat. Har bir savolga namunani o‘qing va 5 qismni ko‘ring. Yodlamang — tuzilishini o‘rganing.</p>
+    <div class="tabs" id="mtabs"></div>
+    <div class="box model" id="model"></div>
+  </section>
 
-  <h2><span class="n">3</span>Savol</h2>
-  <div class="qs" id="qs"></div>
+  <section class="step" id="s3">
+    <h2><span class="n">3</span>Sizning biznes g‘oyangiz</h2>
+    <p class="sub">Tanish sohani tanlang (oilaviy biznes, kafe, o‘quv markazi, onlayn do‘kon…). G‘oyada raqamli texnologiya bo‘lsin: sayt, bot, ilova, onlayn to‘lov.</p>
+    <div class="idea-grid">
+      <div><label for="f_name">Biznes nomi</label><input id="f_name" placeholder="Tez Osh"></div>
+      <div><label for="f_prod">Mahsulot yoki xizmat</label><input id="f_prod" placeholder="osh va milliy taomlarni yetkazib berish"></div>
+      <div><label for="f_cust">Mijozlar — kim uchun</label><input id="f_cust" placeholder="ofis xodimlari va talabalar"></div>
+      <div><label for="f_prob">Qaysi muammoni hal qiladi</label><input id="f_prob" placeholder="tushlikka vaqt yo‘q"></div>
+      <div><label for="f_val">Qanday qiymat beradi</label><input id="f_val" placeholder="tez, issiq, arzon — 30 daqiqada"></div>
+      <div><label for="f_tech">Raqamli texnologiyalar</label><input id="f_tech" placeholder="sayt, Telegram-bot, Payme/Click, GPS"></div>
+    </div>
+    <label for="idea" style="margin-top:10px">G‘oya 2–3 gapda (imtihonda shunday yozasiz)</label>
+    <textarea id="idea" rows="3" placeholder="Jadvalni to‘ldiring va «Gapga aylantirish»ni bosing yoki o‘zingiz yozing."></textarea>
+    <div class="row">
+      <button class="btn small" id="toText" type="button">Gapga aylantirish</button>
+      <button class="btn ghost small" id="sample" type="button">«Tez Osh» misolini qo‘yish</button>
+      <a class="btn ghost small" id="ideaGpt" href="#" target="_blank" rel="noopener">G‘oya topolmayapman — ChatGPT</a>
+    </div>
+  </section>
 
-  <div id="mineWrap" hidden>
-    <h2><span class="n">4</span>Sizning javobingiz</h2>
-    <textarea id="mine" rows="8" placeholder="Qog‘ozga yozgan javobingizni shu yerga ko‘chiring yoki rasmini ChatGPT’ga alohida yuboring."></textarea>
-  </div>
+  <section class="step" id="s4">
+    <h2><span class="n">4</span>5 ta savol — o‘z biznesingiz uchun</h2>
+    <p class="sub">Har bir savolni oching: nima yozish kerakligini o‘qing, keyin ChatGPT’dan reja yoki namuna oling va <b>o‘z so‘zlaringiz bilan</b> qisqa reja yozing.</p>
+    <div class="box soft" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <span><b>Javob yozuvi:</b></span>
+      <div class="seg" id="script"><button type="button" data-s="lat">Lotin</button><button type="button" data-s="cyr">Кирилл</button></div>
+      <a class="btn small" id="allPlan" href="#" target="_blank" rel="noopener" style="margin-left:auto">5 savolning hammasiga reja</a>
+    </div>
+    <div id="qs"></div>
+  </section>
 
-  <h2>Javob yozuvi</h2>
-  <div class="script" id="script"><button type="button" data-s="lat">Lotin</button><button type="button" data-s="cyr">Кирилл</button></div>
+  <section class="step" id="s5">
+    <h2><span class="n">5</span>Sinov imtihoni</h2>
+    <p class="sub">Imtihondagidek: telefonni chetga qo‘ying (taymerni ishga tushiring), konspektsiz, qog‘ozda. Avval sahifa tepasiga g‘oyangizni 2–3 gapda, keyin <b>yangi sahifada</b> savol raqami va to‘liq javob — 5 qism.</p>
+    <div class="box timer">
+      <div class="t" id="tt">25:00</div>
+      <div class="row" style="justify-content:center">
+        <button class="btn" id="tStart" type="button">Boshlash</button>
+        <button class="btn ghost" id="tReset" type="button">Qaytadan</button>
+      </div>
+      <p class="sub" style="margin:8px 0 0">Javobni yozib bo‘lgach, uni 4-qadamdagi savol ichida «Javobimni tekshir» rejimida tekshiring.</p>
+    </div>
+  </section>
 
-  <div class="row">
-    <a class="btn" id="open" href="#" target="_blank" rel="noopener">ChatGPT’da ochish</a>
-    <button class="btn ghost" id="copy" type="button">So‘rovni nusxalash</button>
-  </div>
-  <details><summary>So‘rov matnini ko‘rish</summary><pre id="preview"></pre></details>
+  <section class="step" id="s6">
+    <h2><span class="n">6</span>Baholash: o‘zingizni yoki qo‘shningizni</h2>
+    <p class="sub">Imtihon mezonlari asosida. Har biriga 0–4 ball — jami 20. Bu taxminiy baho, rasmiy baholashni o‘qituvchi qiladi.</p>
+    <div class="rub" id="rub"></div>
+    <div class="total" id="total">Jami: 0 / 20</div>
+    <div class="box">Baholovchi albatta yozsin: <b>1 ta kuchli tomon</b> va <b>1 ta aniq yaxshilash</b> (masalan: «cheklovlar yo‘q — 2 ta qo‘shing»).</div>
+  </section>
 
-  <div class="note">
-    <b>Eslatma:</b> imtihonda telefon va ChatGPT bo‘lmaydi. Namuna javobni yodlamang — rejani o‘z so‘zlaringiz bilan qog‘ozga yozing (25 daqiqa), keyin «Javobimni tekshir» rejimida tekshiring. Har bir savolga shunday 1 marta mashq qiling.
-  </div>
+  <section class="step">
+    <div class="box warn"><b>Eslatma:</b> imtihonda telefon va ChatGPT bo‘lmaydi. Namunalarni yodlamang — tuzilishini o‘rganing va o‘z so‘zlaringiz bilan yozing. A qism uchun: 5-ma’ruza slaydlari va Kahoot (6-noyabrgacha, PIN 03149006).</div>
+  </section>
   <footer>TEAM University · Raqamli biznes asoslari (DBB) · 2026</footer>
 </main>
 
 <script>
+const STEPS = ['TUSHUNCHA', 'BIZNES', 'MISOL', 'TAHLIL', 'XULOSA'];
 const Q = [
-  { t: 'AKT va biznesni boshqarish', q: 'Biznesni boshqarishda AKT: tanlangan biznesni samarali boshqarishda AKTning hissasini baholang.',
-    k: 'AKT (ICT) biznes kontekstida nimani anglatishi; AKT aloqa, axborot bilan ishlash va tashkiliy faoliyatni qanday qo‘llab-quvvatlashi; biznes uchun mos AKT vositalari (buyurtma, to‘lov, ombor, aloqa, hisobot); samaradorlik, muvofiqlashtirish va boshqaruv qarorlariga ta’siri; kamida 1 joriy etish muammosi va asosli yechim; baho/xulosa. «Baholang» — faqat sanab o‘tish emas, foyda va cheklovni tortib, o‘z bahoingizni bering.' },
-  { t: 'Axborot tizimi', q: 'Axborot tizimlari: axborot tizimi nima ekanini tushuntiring va u tanlangan biznes faoliyatini qanday qo‘llab-quvvatlashini muhokama qiling.',
-    k: 'Axborot tizimi (information system) ta’rifi: ma’lumotni yig‘adi, saqlaydi, qayta ishlaydi va kerakli odamga yetkazadi; 4 komponent: texnologiya, ma’lumot, odamlar, tartib (procedures); bitta jarayon misoli bosqichma-bosqich; kundalik ish va qarorlarni qo‘llab-quvvatlash (masalan TPS va MIS); afzallik va cheklov.' },
-  { t: 'O‘sish uchun axborot tizimlari', q: 'Biznes o‘sishi uchun axborot tizimlari: biznes kengaygani sari qaysi axborot tizimlariga ustuvorlik berish kerakligini baholang va tavsiyalaringizni asoslang.',
-    k: 'Tranzaksiyalarni qayta ishlash tizimi (TPS), boshqaruv axborot tizimi (MIS), qaror qabul qilishni qo‘llab-quvvatlash tizimi (DSS), rahbarlarni qo‘llab-quvvatlash tizimi (ESS), bilimlar bilan ishlash tizimi (KWS), ofisni avtomatlashtirish tizimi (OAS). Hammasini sanamasdan — ustuvorlik va ketma-ketlik (odatda TPS → MIS → DSS, keyin ESS/OAS), har birining sababi va o‘sish ehtiyoji; «agar ... bo‘lsa-chi?» tahlili (what-if analysis) — DSS.' },
-  { t: 'Zamonaviy AKT tendensiyalari', q: 'AKTning zamonaviy tendensiyalari: tegishli misollardan foydalanib, IoT, AI, Big Data va bulutli hisoblash biznes faoliyatini qanday o‘zgartirishi mumkinligini muhokama qiling.',
-    k: 'Buyumlar interneti (IoT), sun’iy intellekt (AI: tor AI va AGI farqi), katta ma’lumotlar (Big Data: volume, velocity, variety, veracity), bulutli hisoblash (IaaS, PaaS, SaaS). To‘rttasini yuzaki sanamasdan, biznes uchun muhim 2–3 tasini chuqur; har biri hal qiladigan aniq biznes muammosi yoki imkoniyati va misol; kutilayotgan afzalliklar va joriy etish xususiyatlari (xarajat, xavfsizlik, malaka); umumiy asosli tavsiya — nimadan boshlash.' },
-  { t: 'SEO', q: 'Qidiruv tizimlari uchun optimallashtirish (SEO): qidiruv natijalarida biznes ko‘rinishini oshirishda SEOning rolini muhokama qiling va tanlangan biznes uchun tegishli SEO usullarini qo‘llang.',
-    k: 'SEO ta’rifi va maqsadi (bepul organik natijalarda yuqorida bo‘lish; SEO ≠ pullik reklama); qidiruv tizimi qanday ishlaydi (skanerlash, indekslash, reytinglash); kalit so‘zlar (keywords) — qanday tanlash va matnda tabiiy qo‘llash, aniq misollar; sahifa ichidagi SEO (on-page: title, description, sarlavhalar/headings, kontent, URL, rasm ALT matni, ichki havolalar/internal links); sahifadan tashqari SEO (off-page: tashqi havolalar/backlinks, sharhlar, Google Maps); texnik SEO (tezlik, mobil versiya, sayt xaritasi sitemap.xml, robots.txt); ko‘rinishni oshirishning biznes qiymati va natijani o‘lchash (Search Console); kalit so‘zni tiqishtirmaslik.' },
+  { t: 'AKT va biznesni boshqarish', v: 'baholang',
+    q: 'Biznesni boshqarishda AKT: tanlangan biznesni samarali boshqarishda AKTning hissasini baholang.',
+    must: ['AKT (ICT) biznes kontekstida nimani anglatadi', 'mos AKT vositalari: buyurtma, to‘lov, ombor, aloqa, hisobot', 'samaradorlik, muvofiqlashtirish va boshqaruv qarorlariga ta’siri', 'kamida 1 ta joriy etish muammosi va asosli yechim', 'xulosa — sizning bahoyingiz'],
+    terms: 'AKT (ICT) · apparat ta’minoti (hardware) · dasturiy ta’minot (software) · kiritish (input) · chiqish (output)',
+    err: 'faqat qurilmalarni sanash — «baholang»da foyda, cheklov va xulosa bo‘lishi shart',
+    model: [
+      'Axborot-kommunikatsiya texnologiyalari (AKT, ICT) — axborotni yig‘ish, saqlash, qayta ishlash va uzatish uchun ishlatiladigan texnologiyalar: kompyuterlar, internet, dasturlar va aloqa vositalari. Biznesda AKT boshqaruvni tezroq, aniqroq va nazorat qilinadigan qiladi.',
+      '«Tez Osh»da AKT har bir jarayonda ishlaydi: mijoz sayt yoki Telegram-bot orqali buyurtma beradi, buyurtma oshxonadagi ekranga tushadi, kuryer telefonidagi GPS ilova orqali manzilni topadi, to‘lov Payme/Click orqali qabul qilinadi, menejer esa Google Sheets’dagi hisobotni ko‘radi.',
+      'Tushlik vaqtida soatiga 60 ta buyurtma keladi. Bot ularni avtomatik qabul qilib, oshxonaga yuboradi — operator telefon qilishi shart emas. Menejer ekranda qaysi kuryer kechikayotganini darhol ko‘radi va buyurtmani boshqa kuryerga beradi.',
+      'Afzalliklari: buyurtma tezroq qabul qilinadi, xatolar kamayadi, menejer biznesni real vaqtda nazorat qiladi. Cheklovlari: tizimni joriy etish xarajati; internet uzilsa buyurtmalar to‘xtaydi; xodimlar yangi dasturni bilmasligi mumkin. Yechim: zaxira telefon liniyasi va xodimlar uchun qisqa trening.',
+      'AKT «Tez Osh»ni samarali boshqarishning asosi: u tezlik, aniqlik va nazorat beradi. Cheklovlar bor, lekin ularni zaxira aloqa va trening bilan kamaytirish mumkin, shuning uchun AKTga sarflangan mablag‘ o‘zini oqlaydi.'] },
+  { t: 'Axborot tizimi', v: 'tushuntiring + muhokama qiling',
+    q: 'Axborot tizimlari: axborot tizimi nima ekanini tushuntiring va u tanlangan biznes faoliyatini qanday qo‘llab-quvvatlashini muhokama qiling.',
+    must: ['ta’rif: yig‘adi, saqlaydi, qayta ishlaydi, yetkazadi', '4 komponent: texnologiya, ma’lumot, odamlar, tartib', 'ular biznesingizda qanday birga ishlaydi', 'tizim qo‘llab-quvvatlaydigan bitta biznes faoliyati (jarayon)', 'operatsion faoliyat yoki qaror uchun foyda'],
+    terms: 'axborot tizimi (information system) · ma’lumot (data) · axborot (information) · tartib (procedures) · TPS · MIS',
+    err: 'axborot tizimini faqat «kompyuter» deb yozish, odamlar va tartibni unutish',
+    model: [
+      'Axborot tizimi (information system) — ma’lumotlarni yig‘adigan, saqlaydigan, qayta ishlaydigan va kerakli odamga kerakli vaqtda yetkazadigan tizim. U 4 qismdan iborat: texnologiya, ma’lumot, odamlar va tartib (procedures).',
+      '«Tez Osh»da: texnologiya — sayt, Telegram-bot va bulutdagi ma’lumotlar bazasi; ma’lumot — taom, manzil, telefon raqami, to‘lov; odamlar — operator, oshpaz, kuryer, menejer; tartib — buyurtma → tasdiqlash → tayyorlash → yetkazish.',
+      'Bitta buyurtma yo‘li: mijoz botda osh buyurtma qiladi → tizim uni bazaga yozadi va oshxona ekraniga yuboradi → oshpaz tayyorlab, «tayyor» tugmasini bosadi → kuryer xabar oladi → mijoz buyurtma holatini telefonda kuzatadi.',
+      'Afzalliklari: kundalik ish tezlashadi, buyurtmalar yo‘qolmaydi, menejer qaysi taom ko‘p sotilishini hisobotdan ko‘radi. Cheklovlari: tizim xarajati va mijozlar ma’lumotlari xavfsizligi; agar xodimlar tartibga amal qilmasa, tizim ham to‘g‘ri ishlamaydi.',
+      'Axborot tizimi «Tez Osh»ning kundalik ishini ham, qarorlarini ham qo‘llab-quvvatlaydi: masalan, menejer hisobotga qarab menyuni o‘zgartiradi. Demak, bu faqat kompyuter emas — texnologiya, ma’lumot, odamlar va tartibning birgalikdagi ishi.'] },
+  { t: 'O‘sish uchun axborot tizimlari', v: 'baholang + asoslang',
+    q: 'Biznes o‘sishi uchun axborot tizimlari: biznes kengaygani sari qaysi axborot tizimlariga ustuvorlik berish kerakligini baholang va tavsiyalaringizni asoslang.',
+    must: ['o‘sishdan kelib chiqadigan ehtiyojlar: filiallar, buyurtmalar, xodimlar', 'TPS, MIS, DSS, ESS, KWS, OAS ko‘rib chiqiladi', 'hammasini emas — ustuvorlik (odatda 1 TPS → 2 MIS → 3 DSS)', 'har bir tavsiya etilgan tizimning maqsadi va sababi', 'xulosa — nega aynan shu tartib'],
+    terms: 'TPS — tranzaksiyalarni qayta ishlash tizimi · MIS — boshqaruv axborot tizimi · DSS — qaror qabul qilishni qo‘llab-quvvatlash tizimi («agar … bo‘lsa-chi?», what-if) · ESS · KWS · OAS',
+    err: '6 tizimni birdaniga tavsiya qilish, ketma-ketlikni asoslamaslik',
+    model: [
+      'Tashkilotning turli darajalari uchun turli axborot tizimlari bor: tranzaksiyalarni qayta ishlash tizimi (TPS) kundalik operatsiyalarni qayd etadi, boshqaruv axborot tizimi (MIS) muntazam hisobotlar beradi, qaror qabul qilishni qo‘llab-quvvatlash tizimi (DSS) «agar … bo‘lsa-chi?» tahlilini qiladi.',
+      '«Tez Osh» tez o‘smoqda: buyurtmalar 10 baravar oshdi, yangi filiallar va kuryerlar qo‘shildi. Endi qo‘lda hisob yuritish imkonsiz — bizga tizimlar kerak.',
+      '1-navbat — TPS: har bir buyurtma va to‘lovni xatosiz qayd etish. 2-navbat — MIS: filiallar bo‘yicha kunlik va haftalik hisobot (sotuv, yetkazish vaqti, xarajat). 3-navbat — DSS: «Yunusobodda yangi filial ochsak, foyda qanday bo‘ladi?» kabi ssenariylarni solishtirish.',
+      'Bu ketma-ketlik muhim: TPS bo‘lmasa, MIS va DSS uchun ma’lumot yo‘q. Rahbarlarni qo‘llab-quvvatlash tizimi (ESS) va ofisni avtomatlashtirish tizimi (OAS) foydali, lekin hozircha ustuvor emas — asosiy ehtiyoj operatsiyalar va nazorat. Cheklov: har bir tizim xarajat va xodimlarni o‘qitishni talab qiladi.',
+      'Tavsiya: avval TPS, keyin MIS, so‘ng DSS joriy etilsin. Bu tartib «Tez Osh»ning o‘sish ehtiyojlariga mos va har bir keyingi tizimga ishonchli ma’lumot beradi.'] },
+  { t: 'Zamonaviy AKT tendensiyalari', v: 'muhokama qiling',
+    q: 'AKTning zamonaviy tendensiyalari: tegishli misollardan foydalanib, IoT, AI, Big Data va bulutli hisoblash biznes faoliyatini qanday o‘zgartirishi mumkinligini muhokama qiling.',
+    must: ['tendensiyalarning roli — qisqacha', '4 tasini yuzaki emas — biznes uchun muhim 2–3 tasini tanlang', 'har biri qaysi aniq muammo yoki imkoniyatni hal qiladi + misol', 'kutilayotgan afzallik va joriy etish: xarajat, xavfsizlik, malaka', 'umumiy asosli tavsiya: nimadan boshlash'],
+    terms: 'IoT (buyumlar interneti) · tor AI (narrow AI) / AGI · Big Data: volume, velocity, variety, veracity · bulut: IaaS, PaaS, SaaS',
+    err: 'to‘rtta ta’rifni sanab o‘tish; «AI hamma muammoni hal qiladi» deb yozish',
+    model: [
+      'Zamonaviy AKT tendensiyalari — buyumlar interneti (IoT), sun’iy intellekt (AI), katta ma’lumotlar (Big Data) va bulutli hisoblash (Cloud Computing) — biznesga tezroq ishlash va yaxshiroq qaror qabul qilish imkonini beradi. «Tez Osh» uchun eng muhimlari — Cloud, Big Data va AI.',
+      'Cloud: sayt, bot va buyurtmalar bazasi bulutda ishlaydi (SaaS va PaaS xizmatlari) — o‘z serverimiz kerak emas. Big Data: minglab buyurtmalar tarixi tahlil qilinadi. AI: mijozga «sizga yoqishi mumkin» taomlar tavsiya qilinadi.',
+      'Big Data tahlili ko‘rsatdi: juma kuni tushlikda buyurtmalar 30% ko‘p. Endi oshxona juma kuni ertaroq va ko‘proq tayyorlaydi, yetkazish vaqti 40 daqiqadan 30 daqiqaga tushdi. AI tavsiyalari o‘rtacha chekni oshiradi.',
+      'Afzalliklari: bulut bilan biznes oson kengayadi, Big Data aniq prognoz beradi, AI sotuvni oshiradi. Cheklovlari: oylik xarajat, mijozlar ma’lumotlari xavfsizligi, xodimlar malakasi; AI xato qilishi mumkin, shuning uchun yakuniy qarorni menejer qabul qiladi. IoT (masalan, muzlatgichdagi harorat sensori) foydali, lekin hozircha ustuvor emas.',
+      'Tavsiya: avval Cloud va Big Data joriy etilsin — ular arzonroq va darhol foyda beradi; keyin AI tavsiyalari qo‘shilsin.'] },
+  { t: 'SEO', v: 'muhokama qiling + qo‘llang',
+    q: 'Qidiruv tizimlari uchun optimallashtirish (SEO): qidiruv natijalarida biznes ko‘rinishini oshirishda SEOning rolini muhokama qiling va tanlangan biznes uchun tegishli SEO usullarini qo‘llang.',
+    must: ['SEO maqsadi: bepul (organik) natijalarda yuqorida bo‘lish — reklama emas', 'kalit so‘zlar: qanday tanlash va matnda tabiiy qo‘llash, 2–3 misol', 'on-page: title, description, sarlavhalar, kontent, URL, rasm ALT, ichki havolalar', 'off-page (backlink, Google Maps, sharhlar) va texnik SEO (tezlik, sitemap.xml, robots.txt)', 'biznes qiymati va natijani o‘lchash (Search Console)'],
+    terms: 'on-page (sahifa ichidagi) · off-page (sahifadan tashqari) · technical SEO · keywords · meta description · internal links · backlink · sitemap.xml · robots.txt',
+    err: 'SEO’ni pullik reklama bilan aralashtirish; kalit so‘zni tiqishtirish',
+    model: [
+      'Qidiruv tizimlari uchun optimallashtirish (SEO) — saytni Google’ning bepul (organik) natijalarida yuqoriroq chiqishi uchun yaxshilash. SEO pullik reklama emas: natija sekinroq, lekin uzoq muddatli.',
+      '«Tez Osh» mijozlari Google’da «osh yetkazib berish Toshkent», «tushlik buyurtma», «Chilonzorda osh» deb qidiradi. Bu kalit so‘zlar (keywords) saytda tabiiy ishlatilishi kerak.',
+      'Sahifa ichidagi SEO (on-page): title — «Osh yetkazib berish Toshkentda — Tez Osh», tushunarli description, H1 sarlavha, har bir taomga alohida sahifa, toza URL (tezosh.uz/osh), rasmlarga ALT matn, ichki havolalar. Sahifadan tashqari SEO (off-page): Google Maps kartochkasi, mijozlar sharhlari, ovqat bloglaridan havolalar (backlinks). Texnik SEO: sayt telefonda tez ochiladi, sitemap.xml va robots.txt bor.',
+      'Afzalliklari: reklamasiz doimiy mijozlar oqimi, ishonch oshadi. Cheklovlari: natija 3–6 oyda ko‘rinadi, doimiy kontent kerak. Kalit so‘zlarni tiqishtirish esa zarar qiladi.',
+      'SEO «Tez Osh» uchun arzon va uzoq muddatli mijoz manbai. Tavsiya: kalit so‘zlar va on-page’dan boshlash, Google Maps’ni to‘ldirish va natijani Search Console’da kuzatish.'] },
 ];
-const SAMPLE = '«Tez Osh» — Toshkentda osh va milliy taomlarni sayt va Telegram-bot orqali 30 daqiqada yetkazib beradigan xizmat. Mijozlar — ofis xodimlari va talabalar. To‘lov Payme/Click orqali, kuryerlar GPS ilovasidan foydalanadi.';
+const RUB = [['Tushunchalar va atamalar (LO1)', 'ta’rif bor, atamalar to‘g‘ri, inglizchasi qavsda'], ['Tanlash va asoslash (LO2)', 'nega aynan shu texnologiya yoki tizim'], ['Biznesga qo‘llash', 'aynan shu biznes, aniq misol'], ['Tahlil', 'kamida 2 afzallik va 2 cheklov yoki muqobil'], ['Tuzilish va aniqlik', '5 qism bor, mantiqiy, savolga mos']];
+const SAMPLE = { f_name: 'Tez Osh', f_prod: 'osh va milliy taomlarni yetkazib berish', f_cust: 'ofis xodimlari va talabalar', f_prob: 'tushlikka vaqt yo‘q', f_val: '30 daqiqada issiq va arzon taom', f_tech: 'sayt, Telegram-bot, Payme/Click, kuryerlar uchun GPS ilova' };
+const FIELDS = ['f_name', 'f_prod', 'f_cust', 'f_prob', 'f_val', 'f_tech'];
 const $ = id => document.getElementById(id);
-const store = { get(k, d) { try { return localStorage.getItem('dbb_' + k) ?? d; } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem('dbb_' + k, v); } catch (e) {} } };
-let mode = store.get('mode', 'plan'), q = store.get('q', '0'), script = store.get('script', 'lat');
+const store = { get(k, d) { try { return localStorage.getItem('dbb2_' + k) ?? d; } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem('dbb2_' + k, v); } catch (e) {} } };
+let script = store.get('script', 'lat');
+const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 
-function renderQs() {
-  const opts = Q.map((x, i) => ({ v: String(i), t: `${i + 1}. ${x.t}`, s: x.q.split(': ').slice(1).join(': ') }));
-  opts.push({ v: 'all', t: 'Barcha 5 savol', s: 'har biriga qisqacha — umumiy tayyorgarlik uchun' });
-  $('qs').innerHTML = opts.map(o => `<label data-v="${o.v}"><input type="radio" name="q" value="${o.v}"><div><strong>${o.t}</strong><span>${o.s}</span></div></label>`).join('');
-  $('qs').querySelectorAll('input').forEach(r => r.addEventListener('change', () => { q = r.value; store.set('q', q); sync(); }));
+// ---------- 2. model answers ----------
+let mi = 0;
+function renderModel() {
+  $('mtabs').innerHTML = Q.map((x, i) => `<button type="button" class="${i === mi ? 'on' : ''}" data-i="${i}">${i + 1}. ${x.t}</button>`).join('');
+  $('mtabs').querySelectorAll('button').forEach(b => b.onclick = () => { mi = +b.dataset.i; renderModel(); });
+  const x = Q[mi];
+  $('model').innerHTML = `<p class="q">Savol ${mi + 1}: «${x.q}»</p>` + x.model.map((t, k) => `<div class="part"><div class="chip c${k + 1}">${k + 1} ${STEPS[k]}</div><p>${t}</p></div>`).join('');
 }
 
-function prompt() {
-  const idea = $('idea').value.trim() || '[biznes g‘oya yozilmagan]';
-  const yozuv = script === 'cyr' ? 'o‘zbek tilida, KIRILL yozuvida' : 'o‘zbek tilida, LOTIN yozuvida';
-  const sel = q === 'all' ? Q : [Q[+q]];
-  const head = `Sen TEAM Universiteti «Raqamli biznes asoslari (DBB)» moduli bo‘yicha imtihonga tayyorlaydigan o‘qituvchisan. Talaba yopiq kitobli, 2 soatlik yozma imtihonning B qismiga tayyorlanmoqda: avval o‘z biznes g‘oyasini qisqacha tavsiflaydi, keyin 5 ta savoldan 3 tasiga javob yozadi (har biri 20 ball). Baholash mezonlari: 1) tushunchalarni bilish (LO1); 2) mos raqamli vositalar va texnologiyalarni tanlash va asoslash (LO2); 3) tushunchalarni tanlangan biznesga qo‘llash; 4) tahlil: afzallik, cheklov, muqobil; 5) javobning tuzilishi va aniqligi.
+// ---------- 3. idea ----------
+function ideaText() { return $('idea').value.trim(); }
+function buildIdea() {
+  const v = Object.fromEntries(FIELDS.map(f => [f, $(f).value.trim()]));
+  if (!v.f_name || !v.f_prod) { toast('Kamida nom va mahsulotni yozing'); return; }
+  let t = `«${v.f_name}» — ${v.f_prod}${v.f_cust ? ` (${v.f_cust} uchun)` : ''}.`;
+  if (v.f_prob || v.f_val) t += ` Biznes ${v.f_prob ? `«${v.f_prob}» muammosini hal qiladi` : ''}${v.f_prob && v.f_val ? ' va ' : ''}${v.f_val ? `${v.f_val} beradi` : ''}.`;
+  if (v.f_tech) t += ` Raqamli texnologiyalar: ${v.f_tech}.`;
+  $('idea').value = t; store.set('idea', t); sync();
+}
 
-Talabaning biznes g‘oyasi: «${idea}»
+// ---------- prompts ----------
+const HEAD = () => `Sen TEAM Universiteti «Raqamli biznes asoslari (DBB)» moduli bo‘yicha imtihonga tayyorlaydigan o‘qituvchisan. Talaba yopiq kitobli, 2 soatlik yozma imtihonning B qismiga tayyorlanmoqda: avval o‘z biznes g‘oyasini qisqacha tavsiflaydi, keyin 5 ta savoldan 3 tasiga javob yozadi (har biri 20 ball). Baholash mezonlari: 1) tushunchalarni bilish (LO1); 2) mos raqamli vositalar va texnologiyalarni tanlash va asoslash (LO2); 3) tushunchalarni tanlangan biznesga qo‘llash; 4) tahlil: afzallik, cheklov, muqobil; 5) javobning tuzilishi va aniqligi. Har bir javob 5 qismdan iborat bo‘lishi kerak: 1) Tushuncha; 2) Biznesga qo‘llash; 3) Misol; 4) Tahlil (afzallik va cheklov); 5) Xulosa. Atamalarni imtihondagidek yoz: o‘zbekcha atama + inglizchasi qavs ichida.
+
+Talabaning biznes g‘oyasi: «${ideaText() || '[biznes g‘oya yozilmagan]'}»
 `;
-  const qs = sel.map((x, i) => `\nSavol${sel.length > 1 ? ' ' + (Q.indexOf(x) + 1) : ''}: «${x.q}»\nJavobda bo‘lishi kerak: ${x.k}`).join('\n');
-  let task;
-  if (mode === 'plan') task = `
-VAZIFA: ${sel.length > 1 ? 'har bir savol uchun' : 'shu savol uchun'} faqat JAVOB REJASINI (skelet) tuz — to‘liq matn yozma. 5 qism: 1) Tushuncha; 2) Biznesga qo‘llash; 3) Misol; 4) Tahlil (afzallik va cheklov); 5) Xulosa. Har qismga 2–3 ta qisqa band, aynan shu biznes misolida. Atamalarni imtihondagidek yoz: o‘zbekcha atama + inglizchasi qavs ichida, masalan «Tranzaksiyalarni qayta ishlash tizimi (TPS)». Oxirida: eslab qolish uchun 5 ta kalit atama va talaba o‘zi javob yozishi uchun 3 ta yo‘naltiruvchi savol.`;
-  else if (mode === 'model') task = `
-VAZIFA: ${sel.length > 1 ? 'har bir savolga' : 'shu savolga'} imtihonda qo‘lda ~25 daqiqada yozsa bo‘ladigan NAMUNA JAVOB yoz (${sel.length > 1 ? 'har biri 150–200' : '250–350'} so‘z). Aniq 5 qism, har biri qisqa sarlavha bilan: 1) Tushuncha — atamalar ta’rifi (o‘zbekcha atama + inglizchasi qavs ichida); 2) Biznesga qo‘llash — aynan shu biznesda; 3) Misol — aniq va real (raqamlar bilan bo‘lsa yaxshi); 4) Tahlil — kamida 2 afzallik va 2 cheklov yoki muqobil; 5) Xulosa — asoslangan tavsiya. Oddiy, tushunarli til. Oxirida: «Eslab qolish uchun 5 ta atama» ro‘yxati va «Bu javobni yodlamang — o‘z so‘zlaringiz bilan qayta yozing» eslatmasi.`;
-  else task = `
-Talabaning javobi:
-«${$('mine').value.trim() || '[javob kiritilmagan]'}»
-
-VAZIFA: talabaning javobini 5 mezon bo‘yicha bahola (har biri 0–4 ball, jami 20): har mezonga ball va 1 jumla izoh. Keyin: 5 qismdan (tushuncha, biznes, misol, tahlil, xulosa) qaysi biri yo‘q yoki zaif; noto‘g‘ri yoki yetishmayotgan atamalar; 3 ta aniq yaxshilash tavsiyasi; zaif joy uchun 2–3 ta yaxshilangan namuna jumla. Javobni to‘liq qayta yozib berma.`;
-  return head + qs + '\n' + task + `\n\nJavobni ${yozuv} yoz. Ortiqcha kirish so‘zlarisiz.`;
+const TAIL = () => `\n\nJavobni o‘zbek tilida, ${script === 'cyr' ? 'KIRILL' : 'LOTIN'} yozuvida yoz. Oddiy, tushunarli til, ortiqcha kirish so‘zlarisiz.`;
+const QBLOCK = (x, i) => `\nSavol ${i + 1}: «${x.q}»\nJavobda bo‘lishi kerak: ${x.must.join('; ')}. Atamalar: ${x.terms}.`;
+function prompt(kind, i, mine) {
+  if (kind === 'idea') return `Men TEAM Universiteti talabasiman, «Raqamli biznes asoslari» imtihoni uchun o‘zimga mos biznes g‘oya kerak. Menga 5 ta realistik g‘oya taklif qil: har biri Toshkentda ishlay oladigan kichik biznes bo‘lsin va unda raqamli texnologiyalar (sayt, bot, ilova, onlayn to‘lov, ma’lumotlar bazasi) ishlatilsin. Har biri uchun: nomi, mahsulot yoki xizmat, mijozlar, qaysi muammoni hal qiladi, qanday qiymat beradi, raqamli texnologiyalar — har biri 1 qator. Oxirida bittasini tanlashda yordam beradigan 2 ta savol ber.` + TAIL();
+  if (kind === 'all') return HEAD() + Q.map(QBLOCK).join('\n') + `\n\nVAZIFA: 5 ta savolning har biri uchun JAVOB REJASI tuz — to‘liq matn emas. Har bir savol: 5 qism (tushuncha, biznes, misol, tahlil, xulosa), har qismga 1–2 qisqa band, aynan shu biznes misolida. Oxirida: imtihon uchun eslab qolish kerak bo‘lgan 10 ta asosiy atama.` + TAIL();
+  const x = Q[i], qb = QBLOCK(x, i);
+  if (kind === 'plan') return HEAD() + qb + `\n\nVAZIFA: shu savol uchun faqat JAVOB REJASINI tuz — to‘liq matn yozma. 5 qism, har qismga 2–3 qisqa band, aynan shu biznes misolida. Oxirida: eslab qolish uchun 5 ta kalit atama va talaba o‘zi yozishi uchun 3 ta yo‘naltiruvchi savol.` + TAIL();
+  if (kind === 'model') return HEAD() + qb + `\n\nVAZIFA: shu savolga imtihonda qo‘lda ~25 daqiqada yozsa bo‘ladigan NAMUNA JAVOB yoz (250–350 so‘z). Aniq 5 qism, har biri qisqa sarlavha bilan; misol aniq va real (raqamlar bilan bo‘lsa yaxshi); tahlilda kamida 2 afzallik va 2 cheklov. Oxirida: «Eslab qolish uchun 5 ta atama» va «Bu javobni yodlamang — o‘z so‘zlaringiz bilan qayta yozing» eslatmasi.` + TAIL();
+  return HEAD() + qb + `\n\nTalabaning javobi:\n«${mine || '[javob kiritilmagan]'}»\n\nVAZIFA: javobni 5 mezon bo‘yicha bahola (har biri 0–4 ball, jami 20): har mezonga ball va 1 jumla izoh. Keyin: 5 qismdan qaysi biri yo‘q yoki zaif; noto‘g‘ri yoki yetishmayotgan atamalar; 3 ta aniq yaxshilash tavsiyasi; zaif joy uchun 2–3 ta yaxshilangan namuna jumla. Javobni to‘liq qayta yozib berma.` + TAIL();
 }
-
+const gptUrl = p => { const u = 'https://chatgpt.com/?q=' + encodeURIComponent(p); return u.length > 7500 ? null : u; };
 function toast(t) { const d = document.createElement('div'); d.className = 'toast'; d.textContent = t; document.body.appendChild(d); setTimeout(() => d.remove(), 3500); }
 async function copyText(t) { try { await navigator.clipboard.writeText(t); return true; } catch (e) { const a = document.createElement('textarea'); a.value = t; document.body.appendChild(a); a.select(); let ok = false; try { ok = document.execCommand('copy'); } catch (_) {} a.remove(); return ok; } }
+async function openGpt(p, ev) {
+  const u = gptUrl(p);
+  if (u) { ev.currentTarget.href = u; return; }
+  ev.preventDefault();
+  await copyText(p);
+  window.open('https://chatgpt.com/', '_blank', 'noopener');
+  toast('So‘rov uzun — nusxalandi. ChatGPT’ga joylashtiring (Ctrl/Cmd + V)');
+}
+function needIdea(ev) { if (!ideaText()) { ev.preventDefault(); toast('Avval 3-qadamda biznes g‘oyangizni yozing'); document.getElementById('s3').scrollIntoView(); return true; } return false; }
 
-function sync() {
-  if (mode === 'check' && q === 'all') { q = '0'; store.set('q', q); }
-  $('modes').querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.m === mode));
-  $('script').querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.s === script));
-  $('qs').querySelectorAll('label').forEach(l => {
-    l.classList.toggle('on', l.dataset.v === q);
-    l.classList.toggle('off', mode === 'check' && l.dataset.v === 'all');
-    l.querySelector('input').checked = l.dataset.v === q;
-  });
-  $('mineWrap').hidden = mode !== 'check';
-  const p = prompt();
-  $('preview').textContent = p;
-  const url = 'https://chatgpt.com/?q=' + encodeURIComponent(p);
-  $('open').href = url.length > 7500 ? 'https://chatgpt.com/' : url;
-  $('open').dataset.long = url.length > 7500 ? '1' : '';
-  const empty = !$('idea').value.trim() || (mode === 'check' && !$('mine').value.trim());
-  $('open').setAttribute('aria-disabled', empty ? 'true' : 'false');
+// ---------- 4. questions ----------
+function renderQs() {
+  $('qs').innerHTML = Q.map((x, i) => `
+  <details class="q" id="q${i}"><summary><span class="qn">${i + 1}</span>${x.t}</summary><div class="in">
+    <p class="qtext">«${x.q}» <b>Fe’l: ${x.v}</b></p>
+    <b>Javobda bo‘lishi shart:</b><ul class="clean must">${x.must.map(m => `<li>${m}</li>`).join('')}</ul>
+    <p class="terms"><b>Atamalar:</b> ${x.terms}</p>
+    <p class="err"><b>Xato:</b> ${x.err}</p>
+    <div class="gpt">
+      <b>ChatGPT bilan (sizning biznesingiz uchun):</b>
+      <div class="row">
+        <a class="btn small" href="#" target="_blank" rel="noopener" data-k="plan" data-i="${i}">Javob rejasi</a>
+        <a class="btn ghost small" href="#" target="_blank" rel="noopener" data-k="model" data-i="${i}">Namuna javob</a>
+      </div>
+      <label style="margin-top:12px" for="mine${i}">O‘z javobingizni tekshirtirish (qog‘ozdan ko‘chiring):</label>
+      <textarea id="mine${i}" rows="5" placeholder="Javobingizni shu yerga yozing yoki ko‘chiring…"></textarea>
+      <div class="row"><a class="btn small" href="#" target="_blank" rel="noopener" data-k="check" data-i="${i}">Javobimni tekshir</a></div>
+    </div>
+  </div></details>`).join('');
+  $('qs').querySelectorAll('a[data-k]').forEach(a => a.addEventListener('click', ev => {
+    const k = a.dataset.k, i = +a.dataset.i;
+    if (needIdea(ev)) return;
+    const mine = k === 'check' ? $('mine' + i).value.trim() : '';
+    if (k === 'check' && !mine) { ev.preventDefault(); toast('Avval javobingizni yozing'); return; }
+    openGpt(prompt(k, i, mine), ev);
+  }));
+  Q.forEach((x, i) => { const t = $('mine' + i); t.value = store.get('mine' + i, ''); t.addEventListener('input', () => store.set('mine' + i, t.value)); });
 }
 
+// ---------- 5. timer ----------
+let left = 25 * 60, tick = null;
+const fmt = s => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+function drawT() { $('tt').textContent = fmt(left); $('tt').style.color = left <= 300 ? 'var(--red)' : ''; }
+$('tStart').onclick = () => {
+  if (tick) { clearInterval(tick); tick = null; $('tStart').textContent = 'Davom ettirish'; return; }
+  $('tStart').textContent = 'Pauza';
+  tick = setInterval(() => { left = Math.max(0, left - 1); drawT(); if (!left) { clearInterval(tick); tick = null; $('tStart').textContent = 'Boshlash'; toast('Vaqt tugadi!'); } }, 1000);
+};
+$('tReset').onclick = () => { clearInterval(tick); tick = null; left = 25 * 60; $('tStart').textContent = 'Boshlash'; drawT(); };
+
+// ---------- 6. rubric ----------
+const score = RUB.map(() => -1);
+function renderRub() {
+  $('rub').innerHTML = RUB.map((r, i) => `<div class="r"><p><b>${i + 1}. ${r[0]}</b><br><small>${r[1]}</small></p><div class="pts">${[0, 1, 2, 3, 4].map(p => `<button type="button" data-i="${i}" data-p="${p}" class="${score[i] === p ? 'on' : ''}">${p}</button>`).join('')}</div></div>`).join('');
+  $('rub').querySelectorAll('button').forEach(b => b.onclick = () => { score[+b.dataset.i] = +b.dataset.p; renderRub(); });
+  const t = score.reduce((a, b) => a + Math.max(0, b), 0);
+  $('total').textContent = `Jami: ${t} / 20` + (score.every(s => s >= 0) ? (t >= 14 ? ' — a’lo darajaga yaqin' : t >= 10 ? ' — yaxshi, lekin tahlil va misolni kuchaytiring' : ' — 5 qismni qayta tekshiring') : '');
+}
+
+// ---------- wiring ----------
+function sync() { $('script').querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.s === script)); }
+FIELDS.forEach(f => { $(f).value = store.get(f, ''); $(f).addEventListener('input', () => store.set(f, $(f).value)); });
 $('idea').value = store.get('idea', '');
-$('mine').value = store.get('mine', '');
-renderQs();
-$('idea').addEventListener('input', () => { store.set('idea', $('idea').value); sync(); });
-$('mine').addEventListener('input', () => { store.set('mine', $('mine').value); sync(); });
-$('sample').addEventListener('click', () => { $('idea').value = SAMPLE; store.set('idea', SAMPLE); sync(); });
-$('modes').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { mode = b.dataset.m; store.set('mode', mode); sync(); }));
-$('script').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { script = b.dataset.s; store.set('script', script); sync(); }));
-$('copy').addEventListener('click', async () => { toast(await copyText(prompt()) ? 'So‘rov nusxalandi — ChatGPT’ga joylashtiring' : 'Nusxalab bo‘lmadi — «So‘rov matnini ko‘rish»dan oling'); });
-$('open').addEventListener('click', async () => { if ($('open').dataset.long) { await copyText(prompt()); toast('So‘rov uzun — nusxalandi. ChatGPT’ga joylashtiring (Ctrl/Cmd + V)'); } });
-sync();
+$('idea').addEventListener('input', () => store.set('idea', $('idea').value));
+$('toText').onclick = buildIdea;
+$('sample').onclick = () => { FIELDS.forEach(f => { $(f).value = SAMPLE[f]; store.set(f, SAMPLE[f]); }); buildIdea(); };
+$('ideaGpt').addEventListener('click', ev => openGpt(prompt('idea'), ev));
+$('allPlan').addEventListener('click', ev => { if (needIdea(ev)) return; openGpt(prompt('all'), ev); });
+$('script').querySelectorAll('button').forEach(b => b.onclick = () => { script = b.dataset.s; store.set('script', script); sync(); });
+renderModel(); renderQs(); renderRub(); drawT(); sync();
 </script>
 </body>
 </html>

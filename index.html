@@ -175,7 +175,7 @@ const STEPS = ['TUSHUNCHA', 'BIZNES', 'MISOL', 'TAHLIL', 'XULOSA'];
 const Q = [
   { t: 'AKT va biznesni boshqarish', v: 'baholang',
     q: 'Biznesni boshqarishda AKT: tanlangan biznesni samarali boshqarishda AKTning hissasini baholang.',
-    must: ['AKT (ICT) nima — biznes uchun', 'biznesingizda qaysi AKT vositalari bor: buyurtma, to‘lov, ombor, aloqa, hisobot', 'AKT ishni qanday tezlashtiradi va boshqarishni osonlashtiradi', 'kamida 1 ta muammo va uning yechimi', 'xulosa — sizning bahoyingiz'],
+    must: ['AKT (ICT) nima — biznes uchun', 'biznesingizda qaysi AKT vositalari bor: buyurtma, to‘lov, ombor, aloqa, hisobot', 'AKT aloqa, ma’lumot bilan ishlash va boshqarishga qanday yordam beradi (tezlik, nazorat, qarorlar)', 'kamida 1 ta muammo va uning yechimi', 'xulosa — sizning bahoyingiz'],
     terms: 'AKT (ICT) · apparat ta’minoti (hardware) · dasturiy ta’minot (software) · kiritish (input) · chiqish (output)',
     err: 'faqat qurilmalarni sanash — «baholang»da foyda, cheklov va xulosa bo‘lishi shart',
     model: [
@@ -219,7 +219,7 @@ const Q = [
       'Tavsiya: avval Cloud va Big Data joriy etilsin — ular arzonroq va darhol foyda beradi; keyin AI tavsiyalari qo‘shilsin.'] },
   { t: 'SEO', v: 'muhokama qiling + qo‘llang',
     q: 'Qidiruv tizimlari uchun optimallashtirish (SEO): qidiruv natijalarida biznes ko‘rinishini oshirishda SEOning rolini muhokama qiling va tanlangan biznes uchun tegishli SEO usullarini qo‘llang.',
-    must: ['SEO nima: Google’da bepul natijalarda yuqorida chiqish (reklama emas)', 'kalit so‘zlar: mijozlar nima deb qidiradi — 2–3 misol', 'sahifa ichida (on-page): title, description, sarlavha, matn, URL, rasm ALT, ichki havolalar', 'sahifadan tashqarida (off-page): boshqa saytlardan havolalar, Google Maps, sharhlar; texnik: tezlik, sitemap.xml, robots.txt', 'foydasi va natijani o‘lchash (Search Console)'],
+    must: ['SEO nima: Google’da bepul natijalarda yuqorida chiqish (reklama emas)', 'kalit so‘zlar: mijozlar nima deb qidiradi — 2–3 misol, matnda tabiiy ishlatish', 'sahifa ichida (on-page): title, description, sarlavha, matn, URL, rasm ALT, ichki havolalar', 'sahifadan tashqarida (off-page): boshqa saytlardan havolalar, Google Maps, sharhlar; texnik: tezlik, sitemap.xml, robots.txt', 'foydasi va natijani o‘lchash (Search Console)'],
     terms: 'on-page (sahifa ichidagi) · off-page (sahifadan tashqari) · technical SEO · keywords · meta description · internal links · backlink · sitemap.xml · robots.txt',
     err: 'SEO’ni pullik reklama bilan aralashtirish; kalit so‘zni tiqishtirish',
     model: [
@@ -311,7 +311,7 @@ function renderQs() {
     <details><summary>Qanday javob bo‘lishi kerak — namuna</summary>
       ${x.model.map((t, k) => `<div class="part"><span class="chip c${k + 1}">${k + 1} ${STEPS[k]}</span><p>${t}</p></div>`).join('')}
     </details>
-    <details><summary>Javobda bo‘lishi shart</summary><ul class="clean">${x.must.map(m => `<li>${m}</li>`).join('')}</ul><p style="margin:6px 0 0"><b>Atamalar:</b> ${x.terms}</p></details>
+    <details><summary>Javobda bo‘lishi shart (rasmiy talablar)</summary><ul class="clean">${x.must.map(m => `<li>${m}</li>`).join('')}</ul><p style="margin:6px 0 0"><b>Atamalar:</b> ${x.terms}</p></details>
     <label class="copied"><input type="checkbox" data-i="${i}"> Daftarga ko‘chirdim</label>
   </div>`).join('');
   $('qs').querySelectorAll('a[data-i]').forEach(a => a.addEventListener('click', ev => {

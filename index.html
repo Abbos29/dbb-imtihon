@@ -102,7 +102,7 @@
   <section class="step" data-t="G‘oya">
     <h1>2. Biznes g‘oyangiz</h1>
     <figure><img src="img/s4.jpg" alt="Biznes g‘oya: 6 qator" onerror="this.parentNode.remove()"></figure>
-    <div class="hint">Tanish sohani tanlang (kafe, o‘quv markazi, onlayn do‘kon, go‘zallik saloni…). G‘oyada <b>raqamli texnologiya</b> bo‘lsin: sayt, bot, ilova, onlayn to‘lov. G‘oya topolmasangiz — pastdagi ChatGPT tugmasini bosing.</div>
+    <div class="hint">O‘zingiz biladigan sohani tanlang: kafe, o‘quv markazi, onlayn do‘kon, go‘zallik saloni… Biznesda <b>sayt, bot, ilova yoki onlayn to‘lov</b> bo‘lsin. G‘oya topolmasangiz — pastdagi ChatGPT tugmasini bosing.</div>
     <div class="grid2">
       <div><label for="f_name">1. Nomi</label><input id="f_name" placeholder="Nomi"></div>
       <div><label for="f_prod">2. Mahsulot yoki xizmat</label><input id="f_prod" placeholder="Nima sotasiz yoki qanday xizmat"></div>
@@ -112,21 +112,21 @@
       <div><label for="f_tech">6. Raqamli texnologiya</label><input id="f_tech" placeholder="sayt, bot, ilova, onlayn to‘lov…"></div>
     </div>
     <label for="idea" style="margin-top:12px">G‘oya 2–3 gapda</label>
-    <textarea id="idea" rows="3" placeholder="Jadvalni to‘ldirib «Gapga aylantirish»ni bosing yoki o‘zingiz yozing"></textarea>
+    <textarea id="idea" rows="3" placeholder="Yuqoridagi qatorlarni to‘ldirib «Matnga aylantirish»ni bosing yoki o‘zingiz yozing"></textarea>
     <div class="row">
-      <button class="btn small" id="toText" type="button">Gapga aylantirish</button>
+      <button class="btn small" id="toText" type="button">Matnga aylantirish</button>
       <a class="btn ghost small" id="ideaGpt" href="#" target="_blank" rel="noopener">G‘oya topolmayapman — ChatGPT</a>
     </div>
-    <div class="hint">Tayyor bo‘lgach, shu 2–3 gapni daftaringizning <b>1-sahifasi tepasiga</b> yozing. Imtihonda ham aynan shunday boshlaysiz.</div>
+    <div class="hint">Shu 2–3 gapni daftaringizning <b>1-sahifasi tepasiga</b> yozing. Imtihonda ham shunday boshlaysiz.</div>
   </section>
 
   <!-- 3 -->
   <section class="step" data-t="Javoblar">
     <h1>3. 5 ta savolga tayyor javob</h1>
     <figure><img src="img/s6.jpg" alt="Javobni olish, yozish, tekshirish" onerror="this.parentNode.remove()"></figure>
-    <div class="hint">Har bir savolda <b>«Javobni olish»</b>ni bosing — ChatGPT sizning biznesingiz uchun 5 qismli javob beradi. Uni o‘qing, tushunmagan joyini so‘rang («buni soddaroq tushuntir»), keyin <b>daftarga ko‘chiring</b> va «Ko‘chirdim» belgisini qo‘ying.</div>
+    <div class="hint">Har bir savolda <b>«Javobni olish»</b> tugmasini bosing — ChatGPT biznesingiz uchun tayyor javob yozadi. O‘qing. Tushunmagan joyini ChatGPT’dan so‘rang. Keyin <b>daftarga ko‘chiring</b> va «Daftarga ko‘chirdim»ni belgilang.</div>
     <div class="row" style="margin:0 0 4px">
-      <span><b>Yozuv:</b></span>
+      <span><b>Javob qaysi yozuvda:</b></span>
       <div class="seg" id="script"><button type="button" data-s="lat">Lotin</button><button type="button" data-s="cyr">Кирилл</button></div>
     </div>
     <div class="progress" id="prog">Ko‘chirildi: 0 / 5</div>
@@ -145,15 +145,15 @@
       <ol class="clean">
         <li><b>1-sahifa tepasi</b> — biznes g‘oyangiz:<div class="ideaShow" id="ideaShow">Bu yerda 2-qadamda yozgan g‘oyangiz ko‘rinadi</div></li>
         <li>Har bir savol — <b>yangi sahifa</b>, tepasida katta qilib «Savol 1», «Savol 2»…</li>
-        <li>5 qismni <b>alohida abzats</b> qiling: Tushuncha · Biznes · Misol · Tahlil · Xulosa.</li>
+        <li>Har bir qismni <b>yangi qatordan</b> boshlang: Tushuncha · Biznes · Misol · Tahlil · Xulosa.</li>
         <li><b>Atamalarning tagiga chizing</b>, masalan: <u>axborot tizimi (information system)</u>.</li>
         <li>Shunchaki ko‘chirmang — <b>tushunib</b> yozing: keyin uni eslab yozasiz.</li>
       </ol>
     </div>
-    <div class="hint"><b>Tekshirib oling:</b> har bir javobda 5 qism bormi? Misolda raqam bormi? Tahlilda 2 afzallik va 2 cheklov bormi? Xulosada tavsiya bormi?</div>
+    <div class="hint"><b>Tekshiring:</b> har bir javobda 5 qism bormi? Misolda raqam bormi? Tahlilda 2 ta afzallik va 2 ta kamchilik bormi? Xulosada maslahat bormi?</div>
     <div class="box timer">
       <b>Sinov: telefonsiz eslab yozing</b>
-      <p class="lead" style="margin:4px 0 6px">Ko‘chirgan javoblaringizdan birini yoping va yangi varaqqa eslab yozing. Keyin solishtiring: qaysi qism yo‘q?</p>
+      <p class="lead" style="margin:4px 0 6px">Daftardagi javoblardan birini yoping va yangi varaqqa eslab yozing. Keyin daftar bilan solishtiring: nima esdan chiqdi?</p>
       <div class="t" id="tt">20:00</div>
       <div class="row" style="justify-content:center">
         <button class="btn" id="tStart" type="button">Boshlash</button>
@@ -161,7 +161,7 @@
       </div>
     </div>
     <div class="box"><b>Imtihongacha (2-noyabr):</b> har kuni 1 ta javobni yopib, eslab yozing va daftaringiz bilan solishtiring. 5 kun = 5 savol. A qism uchun — Kahoot (PIN 03149006).</div>
-    <div class="box warn"><b>Eslatma:</b> imtihonda telefon yo‘q. Daftaringizdagi javoblarni o‘qib, tushunib, o‘z so‘zlaringiz bilan eslab yozishni mashq qiling.</div>
+    <div class="box warn"><b>Eslatma:</b> imtihonda telefon yo‘q. Shuning uchun daftardagi javoblarni o‘qing, tushuning va o‘z so‘zlaringiz bilan eslab yozishni mashq qiling.</div>
   </section>
 </main>
 
@@ -175,7 +175,7 @@ const STEPS = ['TUSHUNCHA', 'BIZNES', 'MISOL', 'TAHLIL', 'XULOSA'];
 const Q = [
   { t: 'AKT va biznesni boshqarish', v: 'baholang',
     q: 'Biznesni boshqarishda AKT: tanlangan biznesni samarali boshqarishda AKTning hissasini baholang.',
-    must: ['AKT (ICT) biznes kontekstida nimani anglatadi', 'mos AKT vositalari: buyurtma, to‘lov, ombor, aloqa, hisobot', 'samaradorlik, muvofiqlashtirish va boshqaruv qarorlariga ta’siri', 'kamida 1 ta joriy etish muammosi va asosli yechim', 'xulosa — sizning bahoyingiz'],
+    must: ['AKT (ICT) nima — biznes uchun', 'biznesingizda qaysi AKT vositalari bor: buyurtma, to‘lov, ombor, aloqa, hisobot', 'AKT ishni qanday tezlashtiradi va boshqarishni osonlashtiradi', 'kamida 1 ta muammo va uning yechimi', 'xulosa — sizning bahoyingiz'],
     terms: 'AKT (ICT) · apparat ta’minoti (hardware) · dasturiy ta’minot (software) · kiritish (input) · chiqish (output)',
     err: 'faqat qurilmalarni sanash — «baholang»da foyda, cheklov va xulosa bo‘lishi shart',
     model: [
@@ -183,10 +183,10 @@ const Q = [
       '«Tez Osh»da AKT har bir jarayonda ishlaydi: mijoz sayt yoki Telegram-bot orqali buyurtma beradi, buyurtma oshxonadagi ekranga tushadi, kuryer telefonidagi GPS ilova orqali manzilni topadi, to‘lov Payme/Click orqali qabul qilinadi, menejer esa Google Sheets’dagi hisobotni ko‘radi.',
       'Tushlik vaqtida soatiga 60 ta buyurtma keladi. Bot ularni avtomatik qabul qilib, oshxonaga yuboradi — operator telefon qilishi shart emas. Menejer ekranda qaysi kuryer kechikayotganini darhol ko‘radi va buyurtmani boshqa kuryerga beradi.',
       'Afzalliklari: buyurtma tezroq qabul qilinadi, xatolar kamayadi, menejer biznesni real vaqtda nazorat qiladi. Cheklovlari: tizimni joriy etish xarajati; internet uzilsa buyurtmalar to‘xtaydi; xodimlar yangi dasturni bilmasligi mumkin. Yechim: zaxira telefon liniyasi va xodimlar uchun qisqa trening.',
-      'AKT «Tez Osh»ni samarali boshqarishning asosi: u tezlik, aniqlik va nazorat beradi. Cheklovlar bor, lekin ularni zaxira aloqa va trening bilan kamaytirish mumkin, shuning uchun AKTga sarflangan mablag‘ o‘zini oqlaydi.'] },
+      'AKT «Tez Osh»ni samarali boshqarishning asosi: u tezlik, aniqlik va nazorat beradi. Kamchiliklar bor, lekin ularni zaxira aloqa va trening bilan kamaytirish mumkin. Shuning uchun AKTga pul sarflash foydali.'] },
   { t: 'Axborot tizimi', v: 'tushuntiring + muhokama qiling',
     q: 'Axborot tizimlari: axborot tizimi nima ekanini tushuntiring va u tanlangan biznes faoliyatini qanday qo‘llab-quvvatlashini muhokama qiling.',
-    must: ['ta’rif: yig‘adi, saqlaydi, qayta ishlaydi, yetkazadi', '4 komponent: texnologiya, ma’lumot, odamlar, tartib', 'ular biznesingizda qanday birga ishlaydi', 'tizim qo‘llab-quvvatlaydigan bitta biznes faoliyati (jarayon)', 'operatsion faoliyat yoki qaror uchun foyda'],
+    must: ['axborot tizimi nima: ma’lumotni yig‘adi, saqlaydi, qayta ishlaydi, yetkazadi', '4 qismi: texnologiya, ma’lumot, odamlar, tartib', 'bu 4 qism biznesingizda qanday birga ishlaydi', 'bitta jarayon misoli (masalan, buyurtma yo‘li)', 'kundalik ishga va qarorlarga foydasi'],
     terms: 'axborot tizimi (information system) · ma’lumot (data) · axborot (information) · tartib (procedures) · TPS · MIS',
     err: 'axborot tizimini faqat «kompyuter» deb yozish, odamlar va tartibni unutish',
     model: [
@@ -197,33 +197,33 @@ const Q = [
       'Axborot tizimi «Tez Osh»ning kundalik ishini ham, qarorlarini ham qo‘llab-quvvatlaydi: masalan, menejer hisobotga qarab menyuni o‘zgartiradi. Demak, bu faqat kompyuter emas — texnologiya, ma’lumot, odamlar va tartibning birgalikdagi ishi.'] },
   { t: 'O‘sish uchun axborot tizimlari', v: 'baholang + asoslang',
     q: 'Biznes o‘sishi uchun axborot tizimlari: biznes kengaygani sari qaysi axborot tizimlariga ustuvorlik berish kerakligini baholang va tavsiyalaringizni asoslang.',
-    must: ['o‘sishdan kelib chiqadigan ehtiyojlar: filiallar, buyurtmalar, xodimlar', 'TPS, MIS, DSS, ESS, KWS, OAS ko‘rib chiqiladi', 'hammasini emas — ustuvorlik (odatda 1 TPS → 2 MIS → 3 DSS)', 'har bir tavsiya etilgan tizimning maqsadi va sababi', 'xulosa — nega aynan shu tartib'],
+    must: ['biznes o‘sganda nimalar kerak bo‘ladi', 'TPS, MIS, DSS, ESS, KWS, OAS ichidan tanlang', 'hammasini emas — tartib bilan: 1 TPS → 2 MIS → 3 DSS', 'har birini nega tanladingiz', 'xulosa — nega aynan shu tartib'],
     terms: 'TPS — tranzaksiyalarni qayta ishlash tizimi · MIS — boshqaruv axborot tizimi · DSS — qaror qabul qilishni qo‘llab-quvvatlash tizimi («agar … bo‘lsa-chi?», what-if) · ESS · KWS · OAS',
     err: '6 tizimni birdaniga tavsiya qilish, ketma-ketlikni asoslamaslik',
     model: [
       'Tashkilotning turli darajalari uchun turli axborot tizimlari bor: tranzaksiyalarni qayta ishlash tizimi (TPS) kundalik operatsiyalarni qayd etadi, boshqaruv axborot tizimi (MIS) muntazam hisobotlar beradi, qaror qabul qilishni qo‘llab-quvvatlash tizimi (DSS) «agar … bo‘lsa-chi?» tahlilini qiladi.',
       '«Tez Osh» tez o‘smoqda: buyurtmalar 10 baravar oshdi, yangi filiallar va kuryerlar qo‘shildi. Endi qo‘lda hisob yuritish imkonsiz — bizga tizimlar kerak.',
       '1-navbat — TPS: har bir buyurtma va to‘lovni xatosiz qayd etish. 2-navbat — MIS: filiallar bo‘yicha kunlik va haftalik hisobot (sotuv, yetkazish vaqti, xarajat). 3-navbat — DSS: «Yunusobodda yangi filial ochsak, foyda qanday bo‘ladi?» kabi ssenariylarni solishtirish.',
-      'Bu ketma-ketlik muhim: TPS bo‘lmasa, MIS va DSS uchun ma’lumot yo‘q. Rahbarlarni qo‘llab-quvvatlash tizimi (ESS) va ofisni avtomatlashtirish tizimi (OAS) foydali, lekin hozircha ustuvor emas — asosiy ehtiyoj operatsiyalar va nazorat. Cheklov: har bir tizim xarajat va xodimlarni o‘qitishni talab qiladi.',
+      'Bu ketma-ketlik muhim: TPS bo‘lmasa, MIS va DSS uchun ma’lumot yo‘q. Rahbarlarni qo‘llab-quvvatlash tizimi (ESS) va ofisni avtomatlashtirish tizimi (OAS) ham foydali, lekin hozir birinchi navbatda kerak emas — avval kundalik ish va nazorat muhim. Cheklov: har bir tizim xarajat va xodimlarni o‘qitishni talab qiladi.',
       'Tavsiya: avval TPS, keyin MIS, so‘ng DSS joriy etilsin. Bu tartib «Tez Osh»ning o‘sish ehtiyojlariga mos va har bir keyingi tizimga ishonchli ma’lumot beradi.'] },
   { t: 'Zamonaviy AKT tendensiyalari', v: 'muhokama qiling',
     q: 'AKTning zamonaviy tendensiyalari: tegishli misollardan foydalanib, IoT, AI, Big Data va bulutli hisoblash biznes faoliyatini qanday o‘zgartirishi mumkinligini muhokama qiling.',
-    must: ['tendensiyalarning roli — qisqacha', '4 tasini yuzaki emas — biznes uchun muhim 2–3 tasini tanlang', 'har biri qaysi aniq muammo yoki imkoniyatni hal qiladi + misol', 'kutilayotgan afzallik va joriy etish: xarajat, xavfsizlik, malaka', 'umumiy asosli tavsiya: nimadan boshlash'],
+    must: ['IoT, AI, Big Data va bulut — qisqacha', '4 tasini emas, biznesingiz uchun muhim 2–3 tasini tanlang', 'har biri qaysi muammoni hal qiladi + misol', 'foydasi va kamchiligi: xarajat, xavfsizlik, xodimlar bilimi', 'xulosa — nimadan boshlash kerak'],
     terms: 'IoT (buyumlar interneti) · tor AI (narrow AI) / AGI · Big Data: volume, velocity, variety, veracity · bulut: IaaS, PaaS, SaaS',
     err: 'to‘rtta ta’rifni sanab o‘tish; «AI hamma muammoni hal qiladi» deb yozish',
     model: [
       'Zamonaviy AKT tendensiyalari — buyumlar interneti (IoT), sun’iy intellekt (AI), katta ma’lumotlar (Big Data) va bulutli hisoblash (Cloud Computing) — biznesga tezroq ishlash va yaxshiroq qaror qabul qilish imkonini beradi. «Tez Osh» uchun eng muhimlari — Cloud, Big Data va AI.',
       'Cloud: sayt, bot va buyurtmalar bazasi bulutda ishlaydi (SaaS va PaaS xizmatlari) — o‘z serverimiz kerak emas. Big Data: minglab buyurtmalar tarixi tahlil qilinadi. AI: mijozga «sizga yoqishi mumkin» taomlar tavsiya qilinadi.',
       'Big Data tahlili ko‘rsatdi: juma kuni tushlikda buyurtmalar 30% ko‘p. Endi oshxona juma kuni ertaroq va ko‘proq tayyorlaydi, yetkazish vaqti 40 daqiqadan 30 daqiqaga tushdi. AI tavsiyalari o‘rtacha chekni oshiradi.',
-      'Afzalliklari: bulut bilan biznes oson kengayadi, Big Data aniq prognoz beradi, AI sotuvni oshiradi. Cheklovlari: oylik xarajat, mijozlar ma’lumotlari xavfsizligi, xodimlar malakasi; AI xato qilishi mumkin, shuning uchun yakuniy qarorni menejer qabul qiladi. IoT (masalan, muzlatgichdagi harorat sensori) foydali, lekin hozircha ustuvor emas.',
+      'Afzalliklari: bulut bilan biznes oson kengayadi, Big Data aniq prognoz beradi, AI sotuvni oshiradi. Cheklovlari: oylik xarajat, mijozlar ma’lumotlari xavfsizligi, xodimlar malakasi; AI xato qilishi mumkin, shuning uchun yakuniy qarorni menejer qabul qiladi. IoT (masalan, muzlatgichdagi harorat sensori) ham foydali, lekin hozir birinchi navbatda kerak emas.',
       'Tavsiya: avval Cloud va Big Data joriy etilsin — ular arzonroq va darhol foyda beradi; keyin AI tavsiyalari qo‘shilsin.'] },
   { t: 'SEO', v: 'muhokama qiling + qo‘llang',
     q: 'Qidiruv tizimlari uchun optimallashtirish (SEO): qidiruv natijalarida biznes ko‘rinishini oshirishda SEOning rolini muhokama qiling va tanlangan biznes uchun tegishli SEO usullarini qo‘llang.',
-    must: ['SEO maqsadi: bepul (organik) natijalarda yuqorida bo‘lish — reklama emas', 'kalit so‘zlar: qanday tanlash va matnda tabiiy qo‘llash, 2–3 misol', 'on-page: title, description, sarlavhalar, kontent, URL, rasm ALT, ichki havolalar', 'off-page (backlink, Google Maps, sharhlar) va texnik SEO (tezlik, sitemap.xml, robots.txt)', 'biznes qiymati va natijani o‘lchash (Search Console)'],
+    must: ['SEO nima: Google’da bepul natijalarda yuqorida chiqish (reklama emas)', 'kalit so‘zlar: mijozlar nima deb qidiradi — 2–3 misol', 'sahifa ichida (on-page): title, description, sarlavha, matn, URL, rasm ALT, ichki havolalar', 'sahifadan tashqarida (off-page): boshqa saytlardan havolalar, Google Maps, sharhlar; texnik: tezlik, sitemap.xml, robots.txt', 'foydasi va natijani o‘lchash (Search Console)'],
     terms: 'on-page (sahifa ichidagi) · off-page (sahifadan tashqari) · technical SEO · keywords · meta description · internal links · backlink · sitemap.xml · robots.txt',
     err: 'SEO’ni pullik reklama bilan aralashtirish; kalit so‘zni tiqishtirish',
     model: [
-      'Qidiruv tizimlari uchun optimallashtirish (SEO) — saytni Google’ning bepul (organik) natijalarida yuqoriroq chiqishi uchun yaxshilash. SEO pullik reklama emas: natija sekinroq, lekin uzoq muddatli.',
+      'Qidiruv tizimlari uchun optimallashtirish (SEO) — saytni Google’ning bepul natijalarida yuqoriroq chiqishi uchun yaxshilash. SEO pullik reklama emas: natija sekinroq, lekin uzoq muddatli.',
       '«Tez Osh» mijozlari Google’da «osh yetkazib berish Toshkent», «tushlik buyurtma», «Chilonzorda osh» deb qidiradi. Bu kalit so‘zlar (keywords) saytda tabiiy ishlatilishi kerak.',
       'Sahifa ichidagi SEO (on-page): title — «Osh yetkazib berish Toshkentda — Tez Osh», tushunarli description, H1 sarlavha, har bir taomga alohida sahifa, toza URL (tezosh.uz/osh), rasmlarga ALT matn, ichki havolalar. Sahifadan tashqari SEO (off-page): Google Maps kartochkasi, mijozlar sharhlari, ovqat bloglaridan havolalar (backlinks). Texnik SEO: sayt telefonda tez ochiladi, sitemap.xml va robots.txt bor.',
       'Afzalliklari: reklamasiz doimiy mijozlar oqimi, ishonch oshadi. Cheklovlari: natija 3–6 oyda ko‘rinadi, doimiy kontent kerak. Kalit so‘zlarni tiqishtirish esa zarar qiladi.',
@@ -268,7 +268,7 @@ function buildIdea() {
 }
 
 // ---------- prompts ----------
-const TAIL = () => `\n\nJavobni o‘zbek tilida, ${script === 'cyr' ? 'KIRILL' : 'LOTIN'} yozuvida yoz. Sodda, qisqa gaplar; ortiqcha kirish so‘zlarisiz.`;
+const TAIL = () => `\n\nJavobni o‘zbek tilida, ${script === 'cyr' ? 'KIRILL' : 'LOTIN'} yozuvida yoz. Oddiy, hamma tushunadigan so‘zlar va qisqa gaplar ishlat; murakkab ilmiy so‘zlarsiz, ortiqcha kirish so‘zlarisiz.`;
 function answerPrompt(i) {
   const x = Q[i];
   return `Sen TEAM Universiteti «Raqamli biznes asoslari (DBB)» moduli bo‘yicha o‘qituvchisan. Talaba yopiq kitobli imtihonning B qismiga tayyorlanmoqda va javobni o‘z daftariga qo‘lda ko‘chiradi.
@@ -297,7 +297,7 @@ async function openGpt(p, ev) {
   const u = gptUrl(p);
   if (u) { ev.currentTarget.href = u; return; }
   ev.preventDefault(); await copyText(p); window.open('https://chatgpt.com/', '_blank', 'noopener');
-  toast('So‘rov nusxalandi — ChatGPT’ga joylashtiring (Ctrl/Cmd + V)');
+  toast('Matn nusxalandi — ChatGPT’ga qo‘ying (Ctrl/Cmd + V)');
 }
 
 // ---------- questions ----------

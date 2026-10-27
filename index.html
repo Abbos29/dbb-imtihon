@@ -96,15 +96,6 @@
       <div class="formula"><span class="chip c1">1 TUSHUNCHA</span><span class="chip c2">2 BIZNES</span><span class="chip c3">3 MISOL</span><span class="chip c4">4 TAHLIL</span><span class="chip c5">5 XULOSA</span></div>
     </div>
     <div class="hint">Bugun reja oddiy: g‘oyangizni yozasiz → ChatGPT 5 savolga tayyor javob beradi → siz ularni daftarga ko‘chirasiz → oxirida bittasini telefonsiz eslab yozasiz.</div>
-    <details class="box"><summary><b>O‘qituvchi uchun: dars rejasi (120 daqiqa)</b></summary>
-      <table class="plan">
-        <tr><td>0–10</td><td>1-qadam: imtihon va 5 qism formulasi</td></tr>
-        <tr><td>10–20</td><td>2-qadam: har kim g‘oyasini yozadi</td></tr>
-        <tr><td>20–90</td><td>3–4-qadam: 5 savol × ~14 daqiqa — javobni olish, o‘qish, daftarga ko‘chirish</td></tr>
-        <tr><td>90–110</td><td>Sinov: telefonlar yopiq, 1 ta javobni eslab yozish (20 daqiqa)</td></tr>
-        <tr><td>110–120</td><td>O‘z ko‘chirmasi bilan solishtirish, uyga vazifa</td></tr>
-      </table>
-    </details>
   </section>
 
   <!-- 2 -->
@@ -152,11 +143,11 @@
     </div>
     <div class="box"><b>Ko‘chirish qoidalari:</b>
       <ol class="clean">
-        <li><b>1-sahifa tepasi</b> — biznes g‘oyangiz:<div class="ideaShow" id="ideaShow">2-qadamda g‘oyani yozing</div></li>
+        <li><b>1-sahifa tepasi</b> — biznes g‘oyangiz:<div class="ideaShow" id="ideaShow">Bu yerda 2-qadamda yozgan g‘oyangiz ko‘rinadi</div></li>
         <li>Har bir savol — <b>yangi sahifa</b>, tepasida katta qilib «Savol 1», «Savol 2»…</li>
         <li>5 qismni <b>alohida abzats</b> qiling: Tushuncha · Biznes · Misol · Tahlil · Xulosa.</li>
-        <li><b>Atamalarning tagiga chizing</b> (masalan: axborot tizimi (information system)).</li>
-        <li>Ko‘r-ko‘rona emas, <b>tushunib</b> yozing — keyin eslab yozishingiz kerak bo‘ladi.</li>
+        <li><b>Atamalarning tagiga chizing</b>, masalan: <u>axborot tizimi (information system)</u>.</li>
+        <li>Shunchaki ko‘chirmang — <b>tushunib</b> yozing: keyin uni eslab yozasiz.</li>
       </ol>
     </div>
     <div class="hint"><b>Tekshirib oling:</b> har bir javobda 5 qism bormi? Misolda raqam bormi? Tahlilda 2 afzallik va 2 cheklov bormi? Xulosada tavsiya bormi?</div>
@@ -266,7 +257,7 @@ window.addEventListener('hashchange', () => { const n = parseInt(location.hash.s
 
 // ---------- idea ----------
 const ideaText = () => $('idea').value.trim();
-function showIdea() { $('ideaShow').textContent = ideaText() || '2-qadamda g‘oyani yozing'; }
+function showIdea() { $('ideaShow').textContent = ideaText() || 'Bu yerda 2-qadamda yozgan g‘oyangiz ko‘rinadi'; }
 function buildIdea() {
   const v = Object.fromEntries(FIELDS.map(f => [f, $(f).value.trim()]));
   if (!v.f_name || !v.f_prod) { toast('Kamida nom va mahsulotni yozing'); return; }
